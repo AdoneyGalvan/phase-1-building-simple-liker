@@ -2,8 +2,30 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+const errorModal = document.getElementById('modal');
+errorModal.classList.add('hidden');
 
+const likeGlyph = document.getElementsByClassName('like-glyph')[0];
+
+likeGlyph.addEventListener('click', (e) => {
+  e.target.innerText = EMPTY_HEART;
+  e.target.classList.remove('activated-heart');
+});
+
+// Your JavaScript code goes here!
+mimicServerCall()
+.then(() => {
+  likeGlyph.innerText = FULL_HEART;
+  likeGlyph.classList.add('activated-heart');
+})
+.catch((error) => { 
+  errorModal.innerText = error;
+  errorModal.classList.remove('hidden');
+});
+
+setTimeout(() => {
+  errorModal.classList.add('hidden');
+}, 3000);
 
 
 
